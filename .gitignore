@@ -37,3 +37,23 @@
 /part1/unicafe/npm-debug.log*
 /part1/unicafe/yarn-debug.log*
 /part1/unicafe/yarn-error.log*
+
+#Anecdotes
+# dependencies
+/part1/anecdotes/node_modules/
+/part1/anecdotes/.pnp/
+/part1/anecdotes/.pnp.js
+
+# production
+/build
+
+# misc
+/part1/anecdotes/.DS_Store
+/part1/anecdotes/.env.local
+/part1/anecdotes/.env.development.local
+/part1/anecdotes/.env.test.local
+/part1/anecdotes/.env.production.local
+
+/part1/anecdotes/npm-debug.log*
+/part1/anecdotes/yarn-debug.log*
+/part1/anecdotes/yarn-error.log*
