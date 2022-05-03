@@ -1,6 +1,33 @@
 import { useState } from 'react'
 
+const Title = ({text}) => <><h1>{text}</h1></>;
+
 const Button = ({handleClick, text}) => <><button onClick={handleClick}>{text}</button></>;
+
+const MostVotedAnecdote = ({anecdotes, votes}) => {
+
+  //Get maximum inside votes array
+  let maximumValue = 0, maximumElemIndex = 0;
+  votes.forEach((currentValue, index) => {
+    if (currentValue > maximumValue){
+      maximumValue = currentValue;
+      maximumElemIndex = index;
+    }
+  });
+
+  const mostVotedQuoteIndex = maximumElemIndex;
+
+  if (maximumValue === 0) {
+    return(<><p>There are no voted anecdotes still</p></>);
+  }
+
+  return (
+    <div>
+      <p>{anecdotes[mostVotedQuoteIndex]}</p>
+      <p>With {votes[mostVotedQuoteIndex]} votes</p>
+    </div>
+  );
+};
 
 const App = () => {
   const anecdotes = [
@@ -18,7 +45,15 @@ const App = () => {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
 
+  //State Handling
+
   const [selected, setSelected] = useState(0)
+
+  //Fill votes array with 0's
+  const votesEmptyArray = Array(anecdotes.length).fill(0);
+  const [votes, setVotes] = useState(votesEmptyArray);
+
+  
 
   const handleRandomAnecdote = () => {
     let nextIndex;
@@ -31,11 +66,22 @@ const App = () => {
     setSelected(nextIndex);
   }
 
+  const handleVote = () => {
+    const copy = [...votes]
+    // increment the votes in position selected by one
+    copy[selected] += 1;
+    setVotes(copy);
+  }
+
   return (
     <div>
+      <Title text="Anecdote of the day"></Title>
       <p>{anecdotes[selected]}</p>
       <Button handleClick={handleRandomAnecdote} text="next anecdote"/>
-    </div>
+      <Button handleClick={handleVote} text="vote" />
+      <Title text="Most voted anecdote"></Title>
+      <MostVotedAnecdote votes={votes} anecdotes={anecdotes}></MostVotedAnecdote>
+      </div>
   );
 } 
 
