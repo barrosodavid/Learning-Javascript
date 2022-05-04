@@ -4,8 +4,6 @@
 /part1/courseinfo/.pnp/
 /part1/courseinfo/.pnp.js
 
-# production
-/build
 
 # misc
 /part1/courseinfo/.DS_Store
@@ -24,8 +22,6 @@
 /part1/unicafe/.pnp/
 /part1/unicafe/.pnp.js
 
-# production
-/build
 
 # misc
 /part1/unicafe/.DS_Store
@@ -44,8 +40,6 @@
 /part1/anecdotes/.pnp/
 /part1/anecdotes/.pnp.js
 
-# production
-/build
 
 # misc
 /part1/anecdotes/.DS_Store
@@ -57,3 +51,21 @@
 /part1/anecdotes/npm-debug.log*
 /part1/anecdotes/yarn-debug.log*
 /part1/anecdotes/yarn-error.log*
+
+#Course Info(Part 2)
+# dependencies
+/part2/courseinfo/node_modules/
+/part2/courseinfo/.pnp/
+/part2/courseinfo/.pnp.js
+
+
+# misc
+/part2/courseinfo/.DS_Store
+/part2/courseinfo/.env.local
+/part2/courseinfo/.env.development.local
+/part2/courseinfo/.env.test.local
+/part2/courseinfo/.env.production.local
+
+/part2/courseinfo/npm-debug.log*
+/part2/courseinfo/yarn-debug.log*
+/part2/courseinfo/yarn-error.log*

@@ -52,7 +52,6 @@ const Part = (props) => {
 }
 
 const Total = (props) => {
-  console.log(props.course.parts);
   let count = 0;
   props.course.parts.forEach(part => count+=part.exercises);
   return (
