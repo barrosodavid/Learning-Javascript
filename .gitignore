@@ -1,71 +1,17 @@
 #Course Info
 # dependencies
-/part1/courseinfo/node_modules/
-/part1/courseinfo/.pnp/
-/part1/courseinfo/.pnp.js
+/part?/*/node_modules/
+/part?/*/.pnp/
+/part?/*/.pnp.js
 
 
 # misc
-/part1/courseinfo/.DS_Store
-/part1/courseinfo/.env.local
-/part1/courseinfo/.env.development.local
-/part1/courseinfo/.env.test.local
-/part1/courseinfo/.env.production.local
+/part?/*/.DS_Store
+/part?/*/.env.local
+/part?/*/.env.development.local
+/part?/*/.env.test.local
+/part?/*/.env.production.local
 
-/part1/courseinfo/npm-debug.log*
-/part1/courseinfo/yarn-debug.log*
-/part1/courseinfo/yarn-error.log*
-
-#Unicafe
-# dependencies
-/part1/unicafe/node_modules/
-/part1/unicafe/.pnp/
-/part1/unicafe/.pnp.js
-
-
-# misc
-/part1/unicafe/.DS_Store
-/part1/unicafe/.env.local
-/part1/unicafe/.env.development.local
-/part1/unicafe/.env.test.local
-/part1/unicafe/.env.production.local
-
-/part1/unicafe/npm-debug.log*
-/part1/unicafe/yarn-debug.log*
-/part1/unicafe/yarn-error.log*
-
-#Anecdotes
-# dependencies
-/part1/anecdotes/node_modules/
-/part1/anecdotes/.pnp/
-/part1/anecdotes/.pnp.js
-
-
-# misc
-/part1/anecdotes/.DS_Store
-/part1/anecdotes/.env.local
-/part1/anecdotes/.env.development.local
-/part1/anecdotes/.env.test.local
-/part1/anecdotes/.env.production.local
-
-/part1/anecdotes/npm-debug.log*
-/part1/anecdotes/yarn-debug.log*
-/part1/anecdotes/yarn-error.log*
-
-#Course Info(Part 2)
-# dependencies
-/part2/courseinfo/node_modules/
-/part2/courseinfo/.pnp/
-/part2/courseinfo/.pnp.js
-
-
-# misc
-/part2/courseinfo/.DS_Store
-/part2/courseinfo/.env.local
-/part2/courseinfo/.env.development.local
-/part2/courseinfo/.env.test.local
-/part2/courseinfo/.env.production.local
-
-/part2/courseinfo/npm-debug.log*
-/part2/courseinfo/yarn-debug.log*
-/part2/courseinfo/yarn-error.log*
+/part?/*/npm-debug.log*
+/part?/*/yarn-debug.log*
+/part?/*/yarn-error.log*
