@@ -42,7 +42,7 @@ const PersonForm = ({ addPerson, people }) => {
             setNewName("");
             setNewNumber("");
         }
-        console.log("Button clicked", event.target);
+        console.log("Button clicked");
     };
 
     return (
