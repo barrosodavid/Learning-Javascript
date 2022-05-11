@@ -16,11 +16,11 @@ const App = () => {
 
   const getFilteredCountries = (filter) => {
     let filteredCountries = []
-    countries.forEach( country => {
+    const filterName = filter.toLowerCase();
+    countries.forEach(country => {
       console.log(filter);
       const countryName = country.name.common;
-      const filterName = filter.toLowerCase();
-      const newFilteredCountry = { 
+      const newFilteredCountry = {
         name: countryName,
         id: country.cca2,
         capitals: country.capital,
@@ -28,13 +28,13 @@ const App = () => {
         languages: country.languages,
         shown: false
       };
-      if (countryName.toLowerCase() === filterName){
-        filteredCountries = [newFilteredCountry];
-        return filteredCountries;
-      }else if (countryName.toLowerCase().indexOf(filterName) > -1){
+      if (countryName.toLowerCase().indexOf(filterName) > -1) 
         filteredCountries.push(newFilteredCountry);
-      }
     });
+    //Check for exact name match(useful for cases like choosing between United States and United States Virgin Islands)
+    const exactMatch = filteredCountries.filter(country => country.name.toLowerCase() === filterName);
+    if (exactMatch.length > 0) return exactMatch;
+
     return filteredCountries;
   };
 
@@ -47,13 +47,13 @@ const App = () => {
     axios.get('https://restcountries.com/v3.1/all').then((response) => {
       setCountries(response.data);
     });
-  },[]);
+  }, []);
 
-  return (<div> 
+  return (<div>
     <p>Country search</p>
     name: <input value={filter} onChange={handleSearch} />
     <CountriesView filteredCountries={filteredCountries} filter={filter} />
-    </div>);
+  </div>);
 }
 
 export default App;
