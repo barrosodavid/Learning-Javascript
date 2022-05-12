@@ -1,10 +1,13 @@
 const PhoneBookView = ({ people, searchfilter }) => {
-    const peopleStartingWithFilter = people.filter((person) => {
-        return person.name.toLowerCase().startsWith(searchfilter.toLowerCase());
+    const filteredPeople = people.filter((person) => {
+        if (person.name.toLowerCase().indexOf(searchfilter.toLowerCase()) > -1) {
+            return person;
+        }
     });
+    
     return (
         <div>
-            {peopleStartingWithFilter.map((elem) => <PhoneBookEntry key={elem.id} person={elem}></PhoneBookEntry>)}
+            {filteredPeople.map((elem) => <PhoneBookEntry key={elem.id} person={elem}></PhoneBookEntry>)}
         </div>
     );
 }
