@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import phonebook from '../services/phonebook';
 
-const PersonForm = ({ addPerson, people }) => {
+const PersonForm = ({ setPeople, people }) => {
 
     const [newName, setNewName] = useState('');
     const [newNumber, setNewNumber] = useState('');
@@ -14,6 +15,17 @@ const PersonForm = ({ addPerson, people }) => {
         const numbers = people.map((elem) => elem.number);
         return numbers.includes(number);
     };
+
+    const generateNewId = () => {
+        if (people.length < 1)
+            return 0;
+
+        let max = 0;
+        people.forEach(person => {
+            max = Math.max(person.id, max);
+        });
+        return max + 1;
+    }
 
     const handleNameInput = (event) => {
         setNewName(event.target.value);
@@ -32,15 +44,19 @@ const PersonForm = ({ addPerson, people }) => {
         } else if (numberAlreadyExists(newNumber)) {
             alert(`${newNumber} is already added to the phonebook`);
         } else {
+            
             const newEntry = {
                 name: newName,
                 number: newNumber,
-                id: people.length + 1
+                id: generateNewId()
             };
-
-            addPerson(newEntry);
-            setNewName("");
-            setNewNumber("");
+            phonebook.create(newEntry).then((newPerson) => {
+                setPeople(people.concat(newPerson))
+                setNewName("");
+                setNewNumber("");
+            }).catch( error => {
+                alert("Couldn't add person ", error);
+            });
         }
         console.log("Button clicked");
     };
