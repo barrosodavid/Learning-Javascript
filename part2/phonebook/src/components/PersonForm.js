@@ -40,7 +40,17 @@ const PersonForm = ({ setPeople, people }) => {
         if (newName.length === 0 || newNumber.length === 0) {
             alert("You must fill both fields");
         } else if (nameAlreadyExists(newName)) {
-            alert(`${newName} is already added to the phonebook`);
+            if (window.confirm(`${newName} is already added, do you want to change its phone number?`)){
+                const person = people.find(person => person.name === newName)
+                const changedPerson = { ...person, number: newNumber }
+                phonebook.update(person.id, changedPerson).then(data => {
+                    setPeople(people.map(e => e.id !== person.id ? e : data ));
+                    setNewName("");
+                    setNewNumber("");
+                }).catch(error => {
+                    alert("Couldn't add person ", error);
+                });
+            }
         } else if (numberAlreadyExists(newNumber)) {
             alert(`${newNumber} is already added to the phonebook`);
         } else {
