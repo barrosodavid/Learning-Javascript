@@ -1,6 +1,6 @@
 import phonebook from '../services/phonebook';
 
-const PhoneBookView = ({ people, setPeople, searchfilter }) => {
+const PhoneBookView = ({ people, setPeople, searchfilter, setSuccess, setError}) => {
     const filteredPeople = people.filter((person) => {
         if (person.name.toLowerCase().indexOf(searchfilter.toLowerCase()) > -1) {
             return person;
@@ -12,8 +12,15 @@ const PhoneBookView = ({ people, setPeople, searchfilter }) => {
         if (window.confirm(`Are you sure you want to delete ${deletedPerson.name}?`)){
             phonebook.remove(id).then(() => {
                 setPeople(people.filter(person => person.id !== id));
+                setSuccess(`Removed ${deletedPerson.name} from the phonebook`)
+                setTimeout(() => {
+                    setSuccess(null)
+                }, 2000)
             }).catch(error => {
-                alert(`Couldn't remove ${deletedPerson.name} from the phonebook: ${error}`);
+                setError(`Couldn't remove ${deletedPerson.name} from the phonebook: ${error}`)
+                setTimeout(() => {
+                    setError(null)
+                }, 2000)
             });
         }
     }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import phonebook from '../services/phonebook';
 
-const PersonForm = ({ setPeople, people }) => {
+const PersonForm = ({ setPeople, people , setSuccess, setError}) => {
 
     const [newName, setNewName] = useState('');
     const [newNumber, setNewNumber] = useState('');
@@ -47,25 +47,44 @@ const PersonForm = ({ setPeople, people }) => {
                     setPeople(people.map(e => e.id !== person.id ? e : data ));
                     setNewName("");
                     setNewNumber("");
+                    setSuccess(`Changed phone number of person ${person.name}`)
+                    setTimeout(() => {
+                        setSuccess(null)
+                    }, 2000)
                 }).catch(error => {
-                    alert("Couldn't add person ", error);
+                    setError(`Couldn't change the person ${changedPerson.name}, they were deleted`)
+                    setPeople(people.filter(n => n.id !== changedPerson.id))
+                    setNewName("");
+                    setNewNumber("");
+                    setTimeout(() => {
+                        setError(null)
+                    }, 2000);
                 });
             }
         } else if (numberAlreadyExists(newNumber)) {
-            alert(`${newNumber} is already added to the phonebook`);
+            setError(`${newNumber} number is already added to the phonebook`)
+            setTimeout(() => {
+                setError(null)
+            }, 2000)
         } else {
-            
             const newEntry = {
                 name: newName,
                 number: newNumber,
                 id: generateNewId()
             };
             phonebook.create(newEntry).then((newPerson) => {
-                setPeople(people.concat(newPerson))
+                setPeople(people.concat(newPerson));
                 setNewName("");
                 setNewNumber("");
+                setSuccess(`Added ${newPerson.name} to phonebook`);
+                setTimeout(() => {
+                    setSuccess(null)
+                }, 2000)
             }).catch( error => {
-                alert("Couldn't add person ", error);
+                setError(`Couldn't add ${newName} to the phonebook`)
+                setTimeout(() => {
+                    setError(null)
+                }, 2000)
             });
         }
         console.log("Button clicked");
