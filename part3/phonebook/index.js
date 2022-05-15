@@ -1,8 +1,20 @@
 const express = require('express')
+const morgan = require('morgan')
+const cors = require('cors')
 
 const app = express()
 
+app.use(cors())
+//Json-parser, lets you use response.body
 app.use(express.json())
+//Log requests
+app.use(morgan(':method :url :status :res[content-length] - :type :response-time ms'))
+
+morgan.token('type', (req, res) => { 
+    if (req.body) {
+        return JSON.stringify(req.body)
+    }
+})
 
 let phonebookData = [
     { 
@@ -103,7 +115,7 @@ app.get('/info', (request, response) => {
     response.send(info)
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
