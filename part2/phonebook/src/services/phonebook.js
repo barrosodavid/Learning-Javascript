@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/people'
+const baseUrl = '/api/people'
 
 const getAll = () => {
   return axios.get(baseUrl).then(response => response.data)
@@ -17,4 +17,8 @@ const remove = (id) => {
     return axios.delete(`${baseUrl}/${id}`).then(response => response.data)
 }
 
-export default { getAll, create, update, remove};
+const phonebook = {
+  getAll, create, update, remove
+};
+
+export default phonebook;

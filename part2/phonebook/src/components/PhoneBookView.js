@@ -2,10 +2,9 @@ import phonebook from '../services/phonebook';
 
 const PhoneBookView = ({ people, setPeople, searchfilter, setSuccess, setError}) => {
     const filteredPeople = people.filter((person) => {
-        if (person.name.toLowerCase().indexOf(searchfilter.toLowerCase()) > -1) {
-            return person;
-        }
+        return person.name.toLowerCase().indexOf(searchfilter.toLowerCase()) > -1;
     });
+
 
     const deleteEntry = id => {
         const deletedPerson = people.find((person) => person.id === id);

@@ -1,9 +1,10 @@
-#Course Info
 # dependencies
 /part?/*/node_modules/
 /part?/*/.pnp/
 /part?/*/.pnp.js
 
+# production
+/part?/*/build/
 
 # misc
 /part?/*/.DS_Store
