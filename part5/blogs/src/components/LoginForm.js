@@ -18,7 +18,7 @@ const LoginForm = ({username,password,onUserChange,onPasswordChange,onSubmit}) =
                 onChange={onPasswordChange}
                 placeholder="Password"></input>
             </div>
-            <button type="submit" onClick={onSubmit}>Log in</button>
+            <input type="submit" onClick={onSubmit} value="Log in"></input>
         </form>
     )
 }

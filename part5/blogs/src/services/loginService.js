@@ -4,7 +4,7 @@ const loginUrl = '/api/login'
 
 const login = async (credentials) => {
     const user = await axios.post(loginUrl, credentials)
-    return user
+    return user.data
 }
 
 const loginService = {

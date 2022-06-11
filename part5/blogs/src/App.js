@@ -20,6 +20,16 @@ const App = () => {
     )  
   }, [])
 
+  //Check if already loggged in
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  },[])
+
   const login = async (e) => {
     e.preventDefault()
 
@@ -27,8 +37,9 @@ const App = () => {
       const user = await loginService.login({
         username, password
       })
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
       blogService.setToken(user.token)
-      setUser(user.data)
+      setUser(user)
       setUsername('')
       setPassword('')
     } catch (exception) {
@@ -40,6 +51,14 @@ const App = () => {
     }
     console.log('hallo')
   }
+
+  const logout = async () => {
+    window.localStorage.removeItem('loggedBlogappUser')
+    blogService.setToken(null)
+    setUser(null)
+  }
+
+  //Conditional rendering
   if (!user) {
     return (
       <div>
@@ -63,7 +82,7 @@ const App = () => {
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
-      
+      <button onClick={logout}>Log out</button>
       
       <div>
         <p>{JSON.stringify(user)}</p>
