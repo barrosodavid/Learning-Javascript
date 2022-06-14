@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
-import LoginForm from './components/LoginForm'
 import LoggedInView from './components/LoggedInView'
+import LoggedOutView from './components/LoggedOutView'
 import blogService from './services/blogs'
 import loginService from './services/loginService'
 
@@ -12,7 +11,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
 
-  const [errorMesssage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -49,7 +48,6 @@ const App = () => {
         setErrorMessage('')
       }, 5000)
     }
-    console.log('hallo')
   }
 
   const logout = async () => {
@@ -58,36 +56,40 @@ const App = () => {
     setUser(null)
   }
 
+  const addBlog = async (blog) => {
+    console.log(blog)
+    blogService.create(blog)
+  }
+
+  const loggedOutViewProps = {
+    errorMessage,
+    username,
+    password,
+    login,
+    setUsername,
+    setPassword
+  }
+  const loggedInViewProps = {
+    errorMessage,
+    logout,
+    user,
+    blogs,
+    addBlog
+  }
+
   //Conditional rendering
   if (!user) {
     return (
-      <div>
-        <h2>Log in the app</h2>
-        <h2>{errorMesssage}</h2>
-        <LoginForm 
-        username={username}
-        password={password}
-        onUserChange={({target}) => setUsername(target.value)}
-        onPasswordChange={({target}) => setPassword(target.value)}
-          onSubmit={login}
-          ></LoginForm>
-      </div>
+      <LoggedOutView 
+      {...loggedOutViewProps}
+      >
+      </LoggedOutView>
     )
   } 
   return (
-    <div>
-      <h2>{errorMesssage}</h2>
-      <h2>blogs</h2>
-      <LoggedInView username={user.name}></LoggedInView> 
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
-      <button onClick={logout}>Log out</button>
-      
-      <div>
-        <p>{JSON.stringify(user)}</p>
-      </div>
-    </div>
+    <LoggedInView 
+    {...loggedInViewProps}
+    ></LoggedInView>
   )
   
 }
