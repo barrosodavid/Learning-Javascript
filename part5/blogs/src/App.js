@@ -11,6 +11,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
 
+  const [successMessage, setSuccessMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
@@ -57,11 +58,24 @@ const App = () => {
   }
 
   const addBlog = async (blog) => {
-    console.log(blog)
-    blogService.create(blog)
+    try {
+      const newBlog = await blogService.create(blog)
+      setSuccessMessage(`New blog '${newBlog.title}' by ${newBlog.author} created`)
+      setBlogs(blogs.concat(newBlog))
+      setTimeout(() => {
+        setSuccessMessage('')
+      }, 5000)
+    } catch (exception) {
+      console.log(exception)
+      setErrorMessage('There was an error when adding the blog post')
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 5000)
+    }
   }
 
   const loggedOutViewProps = {
+    successMessage,
     errorMessage,
     username,
     password,
@@ -70,6 +84,7 @@ const App = () => {
     setPassword
   }
   const loggedInViewProps = {
+    successMessage,
     errorMessage,
     logout,
     user,

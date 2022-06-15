@@ -1,10 +1,11 @@
 import BlogForm from './BlogForm'
 import Blog from './Blog'
 
-const LoggedInView = ({blogs, logout, user, errorMessage, addBlog}) => {
+const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlog}) => {
 
     return (
     <div>
+      <h2>{successMessage}</h2>
       <h2>{errorMessage}</h2>
       <h2>blogs</h2>
       <div>
@@ -15,9 +16,6 @@ const LoggedInView = ({blogs, logout, user, errorMessage, addBlog}) => {
         <Blog key={blog.id} blog={blog} />
         )}
       <button onClick={logout}>Log out</button>
-      <div>
-        <p>{JSON.stringify(user)}</p>
-      </div>
     </div>
         
     )

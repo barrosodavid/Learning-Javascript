@@ -1,8 +1,9 @@
 import LoginForm from './LoginForm'
 
-const LoggedOutView = ({errorMessage, username, password, login, setUsername, setPassword}) => {
+const LoggedOutView = ({successMessage, errorMessage, username, password, login, setUsername, setPassword}) => {
     return(<div>
     <h2>Log in the app</h2>
+    <h2>{successMessage}</h2>
     <h2>{errorMessage}</h2>
     <LoginForm 
     username={username}
