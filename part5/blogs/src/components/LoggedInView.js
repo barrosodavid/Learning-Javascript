@@ -1,12 +1,13 @@
 import BlogForm from './BlogForm'
 import Blog from './Blog'
+import {Notification} from '../styles'
 
 const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlog}) => {
 
     return (
     <div>
-      <h2>{successMessage}</h2>
-      <h2>{errorMessage}</h2>
+      {successMessage ? <Notification>{successMessage}</Notification> : <></>}
+      {errorMessage ? <Notification error>{errorMessage}</Notification> : <></>}
       <h2>blogs</h2>
       <div>
         <h1>Welcome back {user.name}!</h1>

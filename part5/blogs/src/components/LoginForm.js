@@ -1,25 +1,26 @@
+import {Button, Form, Input} from '../styles'
 
 const LoginForm = ({username,password,onUserChange,onPasswordChange,onSubmit}) => {
     return(
-        <form>
+        <Form onSubmit={onSubmit}>
             <div>
                 username
-                <input type="text" 
+                <Input type="text" 
                 name="Username"
                 value={username}
                 onChange={onUserChange}
-                placeholder="User"></input>
+                placeholder="User"></Input>
             </div>
             <div>
                 password
-                <input type="password" 
+                <Input type="password" 
                 name="Password"
                 value={password}
                 onChange={onPasswordChange}
-                placeholder="Password"></input>
+                placeholder="Password"></Input>
             </div>
-            <input type="submit" onClick={onSubmit} value="Log in"></input>
-        </form>
+            <Button type="submit">Log in</Button>
+        </Form>
     )
 }
 
