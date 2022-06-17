@@ -5,6 +5,8 @@ const Button = styled.button`
     font-family: Arial;
     color: #ffffff;
     font-size: 20px;
+    margin-top:1em;
+    margin-left: 0.5em;
     background: #738fff;
     padding: 10px 20px 10px 20px;
     border: solid #1f628d 2px;
@@ -18,7 +20,30 @@ const Button = styled.button`
         text-decoration: none;
     }
     &:active{
-        top: -2px;
+        color:blue;
+    }
+`
+
+const ButtonSmall = styled.button`
+font-family: Arial;
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    background: #738fff;
+    padding: 5px 10px 5px 10px;
+    border: solid #1f628d 2px;
+    text-decoration: none;    
+    &:hover{
+        background-image: -webkit-linear-gradient(top, #00d5ff, #e785ff);
+        background-image: -moz-linear-gradient(top, #00d5ff, #e785ff);
+        background-image: -ms-linear-gradient(top, #00d5ff, #e785ff);
+        background-image: -o-linear-gradient(top, #00d5ff, #e785ff);
+        background-image: linear-gradient(to bottom, #00d5ff, #e785ff);
+        text-decoration: none;
+    }
+    &:active{
+        color:blue;
     }
 `
 
@@ -71,11 +96,24 @@ const Title = styled.h1`
 `
 
 //Containers
+const Page = styled.div`
+    margin: 1em;
+    background: #b1cbcc;
+`
+
 const Form = styled.form`
     background: #ccc;
     text-align:left;
 `
 
+const BlogsWrapper = styled.div`
+    background: #ccc;
+`
+
+const BlogContainer = styled.div`
+    margin-bottom: 1em;
+`
 
 
-export {Button, Input, Form, Notification, Title}
+
+export {Button, ButtonSmall, Input, Form, Notification, Title, BlogsWrapper, Page, BlogContainer}

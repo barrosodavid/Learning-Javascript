@@ -3,6 +3,7 @@ import LoggedInView from './components/LoggedInView'
 import LoggedOutView from './components/LoggedOutView'
 import blogService from './services/blogs'
 import loginService from './services/loginService'
+import {Page} from './styles'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -95,16 +96,20 @@ const App = () => {
   //Conditional rendering
   if (!user) {
     return (
-      <LoggedOutView 
-      {...loggedOutViewProps}
-      >
-      </LoggedOutView>
+      <Page>
+        <LoggedOutView 
+        {...loggedOutViewProps}
+        >
+        </LoggedOutView>
+      </Page>
     )
   } 
   return (
-    <LoggedInView 
-    {...loggedInViewProps}
-    ></LoggedInView>
+    <Page>
+      <LoggedInView 
+      {...loggedInViewProps}
+      ></LoggedInView>
+    </Page>
   )
   
 }
