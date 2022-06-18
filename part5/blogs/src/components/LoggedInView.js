@@ -2,7 +2,7 @@ import BlogForm from './BlogForm'
 import BlogPost from './BlogPost'
 import {Title, Button, Notification, BlogsWrapper} from '../styles'
 
-const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlog}) => {
+const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlog, likeBlog}) => {
 
     return (
     <div>
@@ -15,7 +15,7 @@ const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlo
       </div>
       <BlogsWrapper>
         {blogs.map(blog =>
-        <BlogPost key={blog.id} blog={blog} />
+        <BlogPost key={blog.id} blog={blog} likeBlog={async () => await likeBlog(blog)} />
         )}
       </BlogsWrapper>
     </div>

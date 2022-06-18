@@ -75,6 +75,37 @@ const App = () => {
     }
   }
 
+  const likeBlog = async (blog) => {
+    try {
+      const {user, author, title, url, id} = blog
+      const newBlog = {
+        user,
+        likes: blog.likes + 1,
+        author,
+        title,
+        url
+      }
+      await blogService.update(id, newBlog)
+      setSuccessMessage(`Added like to '${newBlog.title}'`)
+      let newBlogs = [...blogs]
+      newBlogs.forEach((blogIt) => {
+        if(blogIt.id === blog.id)
+          blogIt.likes += 1
+        
+      })
+      setBlogs(newBlogs)
+      setTimeout(() => {
+        setSuccessMessage('')
+      }, 5000)
+    } catch(exception) {
+      console.log(exception)
+      setErrorMessage('There was an error when liking the blog post')
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 5000)
+    }
+  }
+
   const loggedOutViewProps = {
     successMessage,
     errorMessage,
@@ -90,7 +121,8 @@ const App = () => {
     logout,
     user,
     blogs,
-    addBlog
+    addBlog,
+    likeBlog
   }
 
   //Conditional rendering
