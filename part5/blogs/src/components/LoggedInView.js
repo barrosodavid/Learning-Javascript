@@ -3,7 +3,13 @@ import BlogPost from './BlogPost'
 import {Title, Button, Notification, BlogsWrapper} from '../styles'
 import Togglable from './Togglable'
 
-const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlog, likeBlog}) => {
+const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlog, likeBlog, deleteBlog}) => {
+
+    const getSortedBlogsByLikes = () => {
+      return blogs.sort((a, b) => {
+        return b.likes - a.likes
+      })
+    }
 
     return (
     <div>
@@ -18,8 +24,14 @@ const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlo
         <BlogForm addBlog={addBlog}></BlogForm>
       </Togglable>
       <BlogsWrapper>
-        {blogs.map(blog =>
-        <BlogPost key={blog.id} blog={blog} likeBlog={async () => await likeBlog(blog)} />
+        {getSortedBlogsByLikes().map(blog => {
+          const deletable = blog.user.username === user.username
+          return <BlogPost key={blog.id} 
+          blog={blog} 
+          likeBlog={async () => await likeBlog(blog)}
+          deleteBlog={async () => await deleteBlog(blog)} 
+          deletable={deletable}/>
+        }
         )}
       </BlogsWrapper>
     </div>

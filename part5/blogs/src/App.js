@@ -86,14 +86,13 @@ const App = () => {
         url
       }
       await blogService.update(id, newBlog)
-      setSuccessMessage(`Added like to '${newBlog.title}'`)
       let newBlogs = [...blogs]
       newBlogs.forEach((blogIt) => {
         if(blogIt.id === blog.id)
           blogIt.likes += 1
-        
       })
       setBlogs(newBlogs)
+      setSuccessMessage(`Added like to '${newBlog.title}'`)
       setTimeout(() => {
         setSuccessMessage('')
       }, 5000)
@@ -103,6 +102,25 @@ const App = () => {
       setTimeout(() => {
         setErrorMessage('')
       }, 5000)
+    }
+  }
+
+  const deleteBlog = async (blog) => {
+    if(window.confirm(`Do you want to delete ${blog.title}?`)){
+      try {
+        console.log("Trying to remove...")
+        await blogService.remove(blog.id)
+        setBlogs(blogs.filter((blogIt) => blogIt.id !== blog.id))
+        setSuccessMessage(`Deleted blog ${blog.title}`)
+        setTimeout(() => {
+          setSuccessMessage('')
+        }, 5000)
+      }catch(exception) {
+        setErrorMessage('There was an error when deleting the blog post')
+        setTimeout(() => {
+          setErrorMessage('')
+        }, 5000)
+      }
     }
   }
 
@@ -122,7 +140,8 @@ const App = () => {
     user,
     blogs,
     addBlog,
-    likeBlog
+    likeBlog,
+    deleteBlog
   }
 
   //Conditional rendering

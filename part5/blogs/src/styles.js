@@ -112,6 +112,9 @@ const BlogsWrapper = styled.div`
 
 const BlogContainer = styled.div`
     margin-bottom: 1em;
+    border: outset 2px #6D6A94;
+    padding:1em;
+    border-radius: 0 0 0 0;
 `
 
 
