@@ -1,5 +1,5 @@
-
-import { useState } from 'react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Button, ButtonSmall } from '../styles'
 
 
@@ -20,6 +20,14 @@ const Togglable = (props) => {
             }
         </div>
     )
+}
+
+Togglable.propTypes = {
+    showText: PropTypes.string.isRequired,
+    hideText: PropTypes.string.isRequired,
+    children: PropTypes.node,
+    visible: PropTypes.bool,
+    big: PropTypes.bool
 }
 
 export default Togglable

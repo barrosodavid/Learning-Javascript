@@ -7,6 +7,8 @@
 /part?/*/build/
 
 # misc
+/part?/*/.vscode/
+
 /part?/*/.DS_Store
 /part?/*/.env
 /part?/*/.env.local
