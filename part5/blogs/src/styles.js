@@ -108,6 +108,17 @@ const Form = styled.form`
 
 const BlogsWrapper = styled.div`
     background: #ccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: wrap;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+    & hr {
+        width: 100%;
+    }
 `
 
 const BlogContainer = styled.div`
@@ -115,6 +126,10 @@ const BlogContainer = styled.div`
     border: outset 2px #6D6A94;
     padding:1em;
     border-radius: 0 0 0 0;
+
+    &:nth-child(2n) {
+        background: silver;
+    }
 `
 
 

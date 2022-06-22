@@ -26,8 +26,17 @@ const LoggedInView = ({blogs, logout, user, successMessage, errorMessage, addBlo
                 <BlogForm addBlog={addBlog}></BlogForm>
             </Togglable>
             <BlogsWrapper>
-                {getSortedBlogsByLikes().map(blog => {
+                {getSortedBlogsByLikes().map((blog, index) => {
                     const deletable = blog.user.username === user.username
+
+                    if ((index + 1) % 3 === 0) {
+                        return <><BlogPost key={blog.id} 
+                            blog={blog} 
+                            likeBlog={async () => await likeBlog(blog)}
+                            deleteBlog={async () => await deleteBlog(blog)} 
+                            deletable={deletable}/><hr/></>
+                    }
+
                     return <BlogPost key={blog.id} 
                         blog={blog} 
                         likeBlog={async () => await likeBlog(blog)}
