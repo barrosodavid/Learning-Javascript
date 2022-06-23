@@ -1,13 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import LoginForm from './LoginForm'
-import { Title, Notification } from '../styles'
+import { Notification, Page, Background } from '../styles'
 
 const LoggedOutView = ({successMessage, errorMessage, username, password, login, setUsername, setPassword}) => {
-    return(<div>
-        <Title>Log in the app</Title>
-        {successMessage ? <Notification>{successMessage}</Notification> : <></>}
-        {errorMessage ? <Notification error>{errorMessage}</Notification> : <></>}
+    return(<>
         <LoginForm 
             username={username}
             password={password}
@@ -15,7 +12,16 @@ const LoggedOutView = ({successMessage, errorMessage, username, password, login,
             onPasswordChange={({target}) => setPassword(target.value)}
             onSubmit={login}
         ></LoginForm>
-    </div>)
+        <div style={{filter: 'blur(2px)'}}>
+            <Background>
+                <Page>
+                    {successMessage ? <Notification>{successMessage}</Notification> : <></>}
+                    {errorMessage ? <Notification error>{errorMessage}</Notification> : <></>}
+                </Page>
+            </Background>
+        </div>
+    </>
+    )
 }
 
 LoggedOutView.propTypes = {

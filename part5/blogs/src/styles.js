@@ -25,7 +25,7 @@ const Button = styled.button`
 `
 
 const ButtonSmall = styled.button`
-font-family: Arial;
+    font-family: Arial;
     color: #ffffff;
     font-size: 16px;
     margin-top: 0.5em;
@@ -44,6 +44,30 @@ font-family: Arial;
     }
     &:active{
         color:blue;
+    }
+`
+
+const CloseButton = styled.button`
+    position: absolute;
+    background: #f77f72;
+    color:white;
+    top:-4px;
+    right:-4px;
+    border: solid #1f628d 1px;
+    border-radius:1em;
+
+    &:hover{
+        background-image: -webkit-linear-gradient(top, #dc143c
+, #e785ff);
+        background-image: -moz-linear-gradient(top, #dc143c
+, #e785ff);
+        background-image: -ms-linear-gradient(top, #dc143c
+, #e785ff);
+        background-image: -o-linear-gradient(top, #dc143c
+, #e785ff);
+        background-image: linear-gradient(to bottom, #dc143c
+, #e785ff);
+        text-decoration: none;
     }
 `
 
@@ -103,7 +127,37 @@ const Page = styled.div`
 
 const Form = styled.form`
     background: #ccc;
-    text-align:left;
+    padding: 2em 5em 5em 5em;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+
+    box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
+    transition:transform 300ms ease-in-out, opacity 300ms ease-in-out;
+`
+
+const FormContainer = styled.div`
+    position: fixed;
+    /* 
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    left: 0;
+    right: 0;
+    */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align:center;
+    /*Flexbox*/
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    z-index: 3;
 `
 
 const BlogsWrapper = styled.div`
@@ -132,6 +186,17 @@ const BlogContainer = styled.div`
     }
 `
 
+const Background = styled.div`
+    background-image: url('https://coolbackgrounds.io/images/backgrounds/index/sea-edge-79ab30e2.png');
+    background-position:center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    width:100vw;
+    height:100vh;
+    margin: 0;
+    padding: 0;
+`
 
 
-export {Button, ButtonSmall, Input, Form, Notification, Title, BlogsWrapper, Page, BlogContainer}
+
+export {Button, ButtonSmall, Input, Form, Notification, Title, BlogsWrapper, Page, BlogContainer, FormContainer, CloseButton, Background}
