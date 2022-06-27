@@ -16,15 +16,16 @@ const Anecdote = ({ content, votes, onClick }) => {
 }
 
 const Anecdotes = () => {
-    const anecdotes = useSelector(state => state)
+    const anecdotes = useSelector(state => state.anecdotes)
     const dispatch = useDispatch()
 
     const vote = (id) => {
         dispatch(addVote(id))
     }
-    const sortedAnecdotes = () => {
-        return anecdotes.sort((a, b) => b.votes - a.votes)
-    }
+
+    //Returns sorted anecdote array by votes in descending order
+    const sortedAnecdotes = () => [...anecdotes].sort((a, b) => b.votes - a.votes)
+
 
     return (<div>
         <h2>Anecdotes</h2>
