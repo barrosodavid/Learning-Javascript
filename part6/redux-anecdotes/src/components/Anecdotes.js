@@ -18,6 +18,15 @@ const Anecdote = ({ content, votes, onClick }) => {
 
 const Anecdotes = () => {
     const anecdotes = useSelector(state => state.anecdotes)
+    const filter = useSelector(state => state.filter.filter).toLowerCase()
+
+    //Returns filtered array of anecdotes
+    const getFilteredAnecdotes = (anecdotes) =>  
+        anecdotes.filter(anecdote => anecdote.content.toLowerCase().indexOf(filter) > -1)
+
+    //Returns sorted anecdote array by votes in descending order
+    const sortByVotes = (anecdotes) => [...anecdotes].sort((a, b) => b.votes - a.votes)
+
     const dispatch = useDispatch()
 
     const vote = (id, content) => {
@@ -28,13 +37,11 @@ const Anecdotes = () => {
         }, 2500)
     }
 
-    //Returns sorted anecdote array by votes in descending order
-    const sortedAnecdotes = () => [...anecdotes].sort((a, b) => b.votes - a.votes)
 
 
     return (<div>
         <h2>Anecdotes</h2>
-        {sortedAnecdotes().map(anecdote =>
+        {sortByVotes(getFilteredAnecdotes(anecdotes)).map(anecdote =>
             <Anecdote key={anecdote.id}
                 content={anecdote.content}
                 votes={anecdote.votes}

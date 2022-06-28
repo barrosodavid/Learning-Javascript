@@ -2,23 +2,28 @@ import { useSelector } from "react-redux"
 
 const Notification = () => {
   const notification = useSelector(state => state.notifications)
-  console.log(notification)
 
-  const style = {
+  const baseStyle = {
     background: '#bddbd2',
     border: 'solid black 2px',
     textAlign: 'center',
-    fontSize: '2em',
-    color: 'black'
+    height: '3em',
+    fontSize: '1em',
+    overflow: 'hidden',
+    color: 'black',
+    visibility: 'visible'
   }
+
+  //Make visible or invisible
+  const style = notification.notification ? baseStyle : {...baseStyle, visibility: 'hidden'}
+
   return (
     <div>
-      {notification.notification ? 
+      {
         <div style={style}>
         {notification.notification}
-        </div> 
-        : 
-        <></>}
+        </div>
+      }
     </div>
   )
 }
