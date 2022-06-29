@@ -10,7 +10,6 @@ export const getAll = async () => {
 export const postNewAnecdote = async (content) => {
     const newAnecdote = {content, votes: 0}
     const request = await axios.post(baseUrl, newAnecdote)
-    console.log("Data added", request.data)
     return request.data
 }
 
