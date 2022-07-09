@@ -1,6 +1,4 @@
-import band from '../src/assets/band.jpeg'
-
-const Bundle = () => {
+const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI}) => {
  return (<div>
     <section className="w-full px-6 pb-12 antialiased bg-white">
     <div className="mx-auto max-w-7xl">
@@ -59,19 +57,23 @@ const Bundle = () => {
 
             <div className="w-full space-y-5 md:w-3/5 md:pr-16">
                 <p className="font-medium text-blue-500">Result</p>
-                    <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
-                        <img src={band} alt="Wrist Band" />
+                    <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                        <div className="relative top-0 left-0">
+                            <img src={bandSrc} alt="WristBand" className="wristbandimage" />
+                        </div>
                     </div>
             </div>
 
             <div className="w-full mt-16 md:mt-0 md:w-2/5">
                 <div className="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
-                    <h3 className="mb-6 text-2xl font-medium text-center">Choose your song</h3>
-                    <input type="text" name="email" className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none" placeholder="Spotify Song URI" />
-                    <div className="block">
-                        <button className="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg">Generate</button>
-                    </div>
-                    <p className="w-full mt-4 text-sm text-center text-gray-500">Don't know where you can find a song URI? <a href="#_" className="text-blue-500 underline">More info</a></p>
+                    <form onSubmit={onURISubmit}>
+                        <h3 className="mb-6 text-2xl font-medium text-center">Choose your song</h3>
+                        <input type="text" name="email" value={spotifyURI} onChange={(e) => setSpotifyURI(e.target.value)} className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none" placeholder="Spotify Song URI" />
+                        <div className="block">
+                            <button className="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg">Generate</button>
+                        </div>
+                        <p className="w-full mt-4 text-sm text-center text-gray-500">Don't know where you can find a song URI? <a href="#_" className="text-blue-500 underline">More info</a></p>
+                    </form>
                 </div>
             </div>
 
@@ -90,13 +92,13 @@ const Bundle = () => {
         <div className="w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
             <h3 className="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">How does it work?</h3>
             <p className="mt-2 text-base text-gray-600 sm:text-lg md:text-normal">
-                The customized code of a bracelet is a QR-like “scannable” tag that can be used to quickly share or access a piece of content within Spotify.
+                The customized code of this wristband is a QR-like “scannable” tag that can be used to quickly share or access a piece of content within Spotify.
             </p>
         </div>
         <div className="w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
-            <h3 className="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">Can you link the wrist band to a playlist I made?</h3>
+            <h3 className="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">Can I link my wristband to a playlist I made?</h3>
             <p className="mt-2 text-base text-gray-600 sm:text-lg md:text-normal">
-                Yes, it's totally fine to have a wrist band with a playlist link, as long as you enter its corresponding Spotify URI
+                Yes, it's totally fine to have a wristband with a playlist link, as long as you enter its corresponding Spotify URI
             </p>
         </div>
         <div className="w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
