@@ -6,6 +6,8 @@ import bandImageService from './services/bandImageService'
 function App() {
   const [imageSrc, setImageSrc] = useState('')
   const [spotifyURI, setSpotifyURI] = useState('')
+  const [backgroundColor, setBackgroundColor] = useState('#000000')
+  const [codeColor, setCodeColor] = useState('White')
 
   const fetchImage = async (uri='spotify:track:424GDxARRXRaZ7Mla9EDI2') => {
     const imageUrl = await bandImageService.generateImage(uri)
@@ -13,7 +15,6 @@ function App() {
   }
   
   useEffect(() => {
-    
     fetchImage()
   }, [])
 
@@ -22,9 +23,20 @@ function App() {
     fetchImage(spotifyURI)
   }
 
+  const bundleProps = {
+      bandSrc: imageSrc,
+      onURISubmit: handleURISubmit,
+      spotifyURI,
+      setSpotifyURI,
+      backgroundColor,
+      setBackgroundColor,
+      codeColor,
+      setCodeColor
+  }
+
   return (
     <div>
-      <Bundle bandSrc={imageSrc} onURISubmit={handleURISubmit} spotifyURI={spotifyURI} setSpotifyURI={setSpotifyURI}></Bundle>
+      <Bundle {...bundleProps}></Bundle>
     </div>
   );
 }

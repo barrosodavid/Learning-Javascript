@@ -1,4 +1,8 @@
-const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI}) => {
+import BackgroundColorPicker from "./components/BackgroundColorPicker"
+import CodeColorPicker from './components/CodeColorPicker'
+
+const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI, backgroundColor, setBackgroundColor, codeColor, setCodeColor}) => {
+
  return (<div>
     <section className="w-full px-6 pb-12 antialiased bg-white">
     <div className="mx-auto max-w-7xl">
@@ -18,7 +22,7 @@ const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI}) => {
                             <a href="#_" className="inline-block w-full py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-indigo-600 lg:mx-3 md:text-center">Cart</a>
                             <a href="#_" className="inline-block w-full py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-indigo-600 lg:mx-3 md:text-center">Contact</a>
                             <a href="#_" className="absolute top-0 left-0 hidden py-2 mt-6 ml-10 mr-2 text-gray-600 lg:inline-block md:mt-0 md:ml-2 lg:mx-3 md:relative">
-                                <svg className="inline w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                <svg className="inline w-5 h-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                             </a>
                         </div>
                         <div className="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
@@ -28,8 +32,8 @@ const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI}) => {
                     </div>
                 </div>
                 <div className="absolute right-0 flex flex-col items-center items-end justify-center w-10 h-10 bg-white rounded-full cursor-pointer md:hidden hover:bg-gray-100">
-                    <svg className="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" x-cloak=""><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" x-cloak=""><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg className="w-6 h-6 text-gray-700" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor" x-cloak=""><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" x-cloak=""><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </div>
             </div>
         </nav>
@@ -53,28 +57,32 @@ const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI}) => {
 
 <section className="w-full px-8 py-16 bg-gray-100 xl:px-8">
     <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col items-center md:flex-row">
-
-            <div className="w-full space-y-5 md:w-3/5 md:pr-16">
-                <p className="font-medium text-blue-500">Result</p>
-                    <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
-                        <div className="relative top-0 left-0">
-                            <img src={bandSrc} alt="WristBand" className="wristbandimage" />
-                        </div>
-                    </div>
-            </div>
+        <div className="flex flex-col items-center md:flex-row-reverse">
 
             <div className="w-full mt-16 md:mt-0 md:w-2/5">
                 <div className="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
                     <form onSubmit={onURISubmit}>
                         <h3 className="mb-6 text-2xl font-medium text-center">Choose your song</h3>
-                        <input type="text" name="email" value={spotifyURI} onChange={(e) => setSpotifyURI(e.target.value)} className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none" placeholder="Spotify Song URI" />
+                        <input type="text" name="code" value={spotifyURI} onChange={(e) => setSpotifyURI(e.target.value)} className="block w-full px-4 py-3 mb-4 border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none shadow-inner shadow-gray-400" placeholder="Spotify Song URI" />
+                        <h3 className="mb-6 text-2xl font-medium text-center">Choose a line color</h3>
+                        <CodeColorPicker selectedOption={codeColor} setSelectedOption={setCodeColor}></CodeColorPicker>
+                        <h3 className="mb-6 text-2xl font-medium text-center">Choose a background color</h3>
+                        <BackgroundColorPicker colorSelected={backgroundColor} setColorSelected={setBackgroundColor}></BackgroundColorPicker>
                         <div className="block">
-                            <button className="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg">Generate</button>
+                            <button type="submit" className="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg">Generate</button>
                         </div>
                         <p className="w-full mt-4 text-sm text-center text-gray-500">Don't know where you can find a song URI? <a href="#_" className="text-blue-500 underline">More info</a></p>
                     </form>
                 </div>
+            </div>
+
+            <div className="w-full space-y-5 md:w-3/5 md:pr-16">
+                <p className="font-medium text-blue-500 hidden md:block">Result</p>
+                    <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                        <div className="relative top-0 left-0">
+                            <img src={bandSrc} alt="WristBand" className="" />
+                        </div>
+                    </div>
             </div>
 
         </div>
@@ -82,11 +90,11 @@ const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI}) => {
 </section>
 
 <section className="relative py-16 bg-white min-w-screen animation-fade animation-delay">
-    <div className="container px-0 px-8 mx-auto sm:px-12 xl:px-5">
-        <p className="text-xs font-bold text-left text-pink-500 uppercase sm:mx-6 sm:text-center sm:text-normal sm:font-bold">
+    <div className="container mx-auto sm:px-12 xl:px-5 text-justify">
+        <p className="text-xs font-bold text-left text-pink-500 uppercase mx-6 sm:text-center sm:text-normal sm:font-bold ">
             Got a Question? We’ve got answers.
         </p>
-        <h3 className="mt-1 text-2xl font-bold text-left text-gray-800 sm:mx-6 sm:text-3xl md:text-4xl lg:text-5xl sm:text-center sm:mx-0">
+        <h3 className="mt-1 text-2xl font-bold text-left text-gray-800 mx-6 sm:text-3xl md:text-4xl lg:text-5xl sm:text-center sm:mx-0">
             Frequently Asked Questions
         </h3>
         <div className="w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
@@ -143,7 +151,7 @@ const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI}) => {
             <a href="#" className="text-gray-400 hover:text-gray-500">
                 <span className="sr-only">Instagram</span>
                 <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                    <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd"></path>
                 </svg>
             </a>
             <a href="#" className="text-gray-400 hover:text-gray-500">
@@ -155,7 +163,7 @@ const Bundle = ({bandSrc, onURISubmit, spotifyURI, setSpotifyURI}) => {
             <a href="#" className="text-gray-400 hover:text-gray-500">
                 <span className="sr-only">GitHub</span>
                 <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd"></path>
                 </svg>
             </a>
         </div>
