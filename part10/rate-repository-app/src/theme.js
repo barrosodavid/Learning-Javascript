@@ -4,7 +4,8 @@ const theme = {
       textSecondary: '#ffffff',
       primary: '#0366d6',
       appBarColor: '#24292e',
-      separator: '#cccccc'
+      separator: '#CCCCCC',
+      mainBackground: '#FFFFFF'
     },
     fontSizes: {
       body: 14,
@@ -19,10 +20,11 @@ const theme = {
     },
     margins: {
       main: 10,
-      betweenElems: 4
+      betweenElems: 4,
+      appBar: 15
     },
     paddings: {
-      elem: 10
+      elem: 10,
     },
     borderRadius: 5
 };
