@@ -1,4 +1,4 @@
-import { Text as NativeText, StyleSheet } from 'react-native';
+import { Text as NativeText, StyleSheet, View } from 'react-native';
 
 import theme from '../theme';
 
@@ -33,7 +33,7 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     style,
   ];
 
-  return <NativeText style={textStyle} {...props} />;
+  return <View style={{flexDirection:'row'}}><NativeText style={textStyle} {...props}>{props.children}</NativeText></View>;
 };
 
 export default Text;

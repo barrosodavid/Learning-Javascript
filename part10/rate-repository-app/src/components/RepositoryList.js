@@ -1,9 +1,44 @@
-import { FlatList, View, StyleSheet, Text } from 'react-native';
+import { FlatList, View, StyleSheet, Image } from 'react-native';
+import theme from '../theme';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
+    backgroundColor: theme.colors.separator
   },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: theme.borderRadius,
+    marginRight: theme.margins.betweenElems,
+    flexGrow: 0
+  },
+  itemContainer: {
+    paddingBottom: theme.paddings.elem
+  },
+  mainContainer: {
+    flexDirection: 'row',
+    margin: theme.margins.main,
+  },
+  descriptionContainer: {
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    marginLeft: theme.margins.betweenElems
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
+  },
+  statContainer: {
+    textAlign: 'center'
+  },
+  languageText: {
+    borderRadius: theme.borderRadius,
+    backgroundColor: theme.colors.primary,
+    color: theme.colors.textSecondary,
+    padding: 2
+  }
 });
 
 const repositories = [
@@ -56,40 +91,63 @@ const repositories = [
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
-    const renderItem = ({ item }) => {
-        return (<View>
-        <Text>
-            Full Name: {item.fullName}
-        </Text>
-        
-        <Text>
-            Description: {item.description}
-        </Text>
-        <Text>
-            Language: {item.language}
-        </Text>
-        <Text>
-            Stars: {item.stargazersCount}
-        </Text>
-        <Text>
-            Forks: {item.forksCount}
-        </Text>
-        <Text>
-            Reviews: {item.reviewCount}
-        </Text>
-        <Text>
-            Rating: {item.ratingAverage}
-        </Text>
-        </View>)
-    }
-
   return (
     <FlatList
       data={repositories}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={renderItem}
+      renderItem={RepositoryItem}
+      contentContainerStyle={{paddingBottom: 100}}
     />
   );
 };
+
+const RepositoryItem = ({item}) => {
+  const getFormattedNumber = (number) => {
+      if (number >= 1000){
+        const division = number / 1000
+        const integerPart = Math.floor(division)
+        const decimalPart = (division % 1).toFixed(1).substring(2)
+        return `${integerPart}.${decimalPart}K`
+      }
+      
+      return number
+  } 
+
+  return (
+  <View style={styles.itemContainer}>
+    <View style={styles.mainContainer}>
+      <Image style={styles.avatar} source={{uri: item.ownerAvatarUrl}}></Image>
+      <View style={styles.descriptionContainer}>
+        <Text fontWeight={'bold'}>
+            {item.fullName}
+        </Text>
+        <Text style={{flex: 1}}>
+            {item.description}
+        </Text>
+        <Text style={styles.languageText}>
+            {item.language}
+        </Text>
+      </View>
+    </View>
+    <View style={styles.statsContainer}>
+      <View style={styles.statContainer}>
+        <Text fontWeight={'bold'}>{getFormattedNumber(item.stargazersCount)}</Text>
+        <Text>Stars</Text>
+      </View>
+      <View style={styles.statContainer}>
+        <Text fontWeight={'bold'}>{getFormattedNumber(item.forksCount)}</Text>
+        <Text>Forks</Text>
+      </View>
+      <View style={styles.statContainer}>
+        <Text fontWeight={'bold'}>{item.reviewCount}</Text>
+        <Text>Reviews</Text>
+      </View>
+      <View style={styles.statContainer}>
+        <Text fontWeight={'bold'}>{item.ratingAverage}</Text>
+        <Text>Rating</Text>
+      </View>
+    </View>
+  </View>)
+}
 
 export default RepositoryList;

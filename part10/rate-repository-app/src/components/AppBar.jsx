@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         paddingBottom: 10,
-        backgroundColor: theme.colors.primary
+        backgroundColor: theme.colors.appBarColor
     },
 })
 
 const AppBar = () => {
     return <View style={styles.container}>
-        <Text fontWeight={'bold'} fontSize={'subheading'}>
+        <Text fontWeight={'bold'} fontSize={'subheading'} color={'textSecondary'}>
             Repositories
         </Text>
     </View>
