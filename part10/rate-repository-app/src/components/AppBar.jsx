@@ -26,7 +26,8 @@ const AppBar = () => {
 }
 
 const AppBarTab = ({text, to}) => {
-    return (<Link to={to} style={styles.link}>
+    return (
+    <Link to={to} style={styles.link}>
             <Text fontWeight={'bold'} fontSize={'subheading'} color={'textSecondary'}>
                 {text}
             </Text>
