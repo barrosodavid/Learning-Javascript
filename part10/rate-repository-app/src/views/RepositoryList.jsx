@@ -33,11 +33,10 @@ const styles = StyleSheet.create({
   statContainer: {
     textAlign: 'center'
   },
-  languageText: {
+  languageContainer: {
     borderRadius: theme.borderRadius,
     backgroundColor: theme.colors.primary,
-    color: theme.colors.textSecondary,
-    padding: 2
+    padding: theme.paddings.info
   }
 });
 
@@ -115,6 +114,7 @@ const RepositoryItem = ({item}) => {
 
   return (
   <View style={styles.itemContainer}>
+    
     <View style={styles.mainContainer}>
       <Image style={styles.avatar} source={{uri: item.ownerAvatarUrl}}></Image>
       <View style={styles.descriptionContainer}>
@@ -124,9 +124,12 @@ const RepositoryItem = ({item}) => {
         <Text style={{flex: 1}}>
             {item.description}
         </Text>
-        <Text style={styles.languageText}>
-            {item.language}
-        </Text>
+          
+        <View style={styles.languageContainer}>
+          <Text color={'textSecondary'}>
+              {item.language}
+          </Text>
+        </View>
       </View>
     </View>
     <View style={styles.statsContainer}>

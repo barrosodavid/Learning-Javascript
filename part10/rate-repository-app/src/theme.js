@@ -1,10 +1,10 @@
 const theme = {
     colors: {
-      textPrimary: '#24292e',
-      textSecondary: '#ffffff',
-      primary: '#0366d6',
-      appBarColor: '#24292e',
-      separator: '#CCCCCC',
+      textPrimary: '#24292e', //dark gray
+      textSecondary: '#ffffff', 
+      primary: '#0366d6', //blue
+      appBarColor: '#24292e', //dark gray
+      separator: '#CCCCCC',  //light gray
       mainBackground: '#FFFFFF'
     },
     fontSizes: {
@@ -25,6 +25,7 @@ const theme = {
     },
     paddings: {
       elem: 10,
+      info: 3
     },
     borderRadius: 5
 };
