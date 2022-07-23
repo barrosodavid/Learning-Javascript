@@ -41,7 +41,7 @@ describe('blog post render', () => {
 
 test('check like button clicked twice', async () => {
     const mockHandler = jest.fn()
-    container = render(<BlogPost blog={testBlog} likeBlog={mockHandler} />).container
+    render(<BlogPost blog={testBlog} likeBlog={mockHandler} />)
     const user = userEvent.setup()
     const viewButton = screen.getByText('view')
     await user.click(viewButton)
