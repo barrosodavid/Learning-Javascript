@@ -7,6 +7,7 @@
 /part*/*/build/
 
 # misc
+/part*/*/.auth
 /part*/*/.vscode/
 
 /part*/*/.DS_Store
